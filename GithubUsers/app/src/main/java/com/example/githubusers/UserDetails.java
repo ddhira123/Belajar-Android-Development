@@ -9,14 +9,7 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserDetails extends AppCompatActivity {
 
-    public static final String EXTRA_IMG = "0";
-    public static final String EXTRA_NAME = "extra_name";
-    public static final String EXTRA_USERNAME = "extra_username";
-    public static final String EXTRA_COMPANY = "extra_company";
-    public static final String EXTRA_LOCATION = "extra_location";
-    public static final String EXTRA_REPO = "extra_repository";
-    public static final String EXTRA_FOLLOWING = "extra_following";
-    public static final String EXTRA_FOLLOWERS = "extra_followers";
+    public static final String EXTRA_USER = "extra_user";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +25,17 @@ public class UserDetails extends AppCompatActivity {
         TextView tv_following = findViewById(R.id.tv_following);
         TextView tv_followers = findViewById(R.id.tv_followers);
 
-        String name = getIntent().getStringExtra(EXTRA_NAME);
-        String userName = getIntent().getStringExtra(EXTRA_USERNAME);
-        String company = getIntent().getStringExtra(EXTRA_COMPANY);
-        String location = getIntent().getStringExtra(EXTRA_LOCATION);
-        String repo = getIntent().getStringExtra(EXTRA_REPO);
-        String following = getIntent().getStringExtra(EXTRA_FOLLOWING);
-        String followers = getIntent().getStringExtra(EXTRA_FOLLOWERS);
-        int img = getIntent().getIntExtra(EXTRA_IMG, 0);
+        User user = getIntent().getParcelableExtra(EXTRA_USER);
 
-        tv_name.setText(name);
-        tv_userName.setText(userName);
-        tv_company.setText(company);
-        tv_location.setText(location);
-        tv_repo.setText(repo);
-        tv_followers.setText(followers);
-        tv_following.setText(following);
-        imgPhoto.setImageResource(img);
+        assert user != null;
+        tv_name.setText(user.getName());
+        tv_userName.setText(user.getUserName());
+        tv_company.setText(user.getCompany());
+        tv_location.setText(user.getLocation());
+        tv_repo.setText(user.getRepository());
+        tv_followers.setText(user.getFollowers());
+        tv_following.setText(user.getFollowing());
+        imgPhoto.setImageResource(user.getPhoto());
 
         assert getSupportActionBar() != null;   //null check
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button

@@ -1,6 +1,9 @@
 package com.example.githubusers;
 
-class User {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+class User implements Parcelable {
     private int photo;
     private String name;
     private String location;
@@ -9,6 +12,10 @@ class User {
     private String following;
     private String followers;
     private String userName;
+
+    public User() {
+
+    }
 
     //setter and getter hasil generate
     public int getPhoto() {
@@ -71,4 +78,43 @@ class User {
     public void setUserName(String userName) {
         this.userName = userName;
     }
+
+    protected User(Parcel in) {
+        name = in.readString();
+        userName = in.readString();
+        company = in.readString();
+        location = in.readString();
+        following = in.readString();
+        followers = in.readString();
+        repository = in.readString();
+        photo = in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(name);
+        dest.writeString(userName);
+        dest.writeString(company);
+        dest.writeString(location);
+        dest.writeString(repository);
+        dest.writeString(followers);
+        dest.writeString(following);
+        dest.writeInt(photo);
+    }
+
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }

@@ -36,14 +36,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 //                Toast.makeText(MainActivity.this, heroes.get(i).getName(), Toast.LENGTH_SHORT).show();
                 Intent mIntent = new Intent(MainActivity.this, UserDetails.class);
-                mIntent.putExtra(UserDetails.EXTRA_NAME, users.get(i).getName());
-                mIntent.putExtra(UserDetails.EXTRA_IMG, users.get(i).getPhoto());
-                mIntent.putExtra(UserDetails.EXTRA_USERNAME, users.get(i).getUserName());
-                mIntent.putExtra(UserDetails.EXTRA_COMPANY, users.get(i).getCompany());
-                mIntent.putExtra(UserDetails.EXTRA_LOCATION, users.get(i).getLocation());
-                mIntent.putExtra(UserDetails.EXTRA_REPO, users.get(i).getRepository());
-                mIntent.putExtra(UserDetails.EXTRA_FOLLOWERS, users.get(i).getFollowers());
-                mIntent.putExtra(UserDetails.EXTRA_FOLLOWING, users.get(i).getFollowing());
+                mIntent.putExtra(UserDetails.EXTRA_USER, users.get(i));
                 startActivity(mIntent);
             }
         });
