@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GithubUserwithAPI</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search for User</string>
+</resources>
