@@ -2,4 +2,12 @@
     <string name="app_name">GithubUserwithAPI</string>
     <string name="search">Search</string>
     <string name="search_hint">Search for User</string>
+    <string name="name_place">Nama</string>
+    <string name="username_place">\@username</string>
+    <string name="company">Company</string>
+    <string name="location">Location</string>
+    <string name="title_activity_user_details">UserDetails</string>
+    <string name="following">Following(s)</string>
+    <string name="followers">Follower(s)</string>
+    <string name="content_tab_text">Ini adalah Tab</string>
 </resources>
