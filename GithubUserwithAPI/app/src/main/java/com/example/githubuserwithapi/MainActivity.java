@@ -1,34 +1,25 @@
 package com.example.githubuserwithapi;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.app.SearchManager;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
-
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.AsyncHttpResponseHandler;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
-
-import cz.msebera.android.httpclient.Header;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private UserAdapter adapter;
     private ProgressBar progressBar;
+    private MainViewModel mainViewModel;
+    private TextView tv_notFound;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,17 +27,30 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         setContentView(R.layout.activity_main);
 
         progressBar = findViewById(R.id.progressBar);
-
+        tv_notFound = findViewById(R.id.tv_notFound);
+        mainViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MainViewModel.class);
         SearchView searchView = findViewById(R.id.search_box);
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
         searchView.setIconifiedByDefault(false);
         searchView.setOnQueryTextListener(this);
-
         RecyclerView recyclerView = findViewById(R.id.search_result);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
         adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
+        mainViewModel.getListUsers().observe(this, new Observer<ArrayList<User>>() {
+            @Override
+            public void onChanged(ArrayList<User> users) {
+                if (users != null) {
+                    adapter.setData(users);
+                    if (users.isEmpty()) {
+                        tv_notFound.setVisibility(View.VISIBLE);
+                    }
+                    showLoading(false);
+                }
+            }
+        });
 
         adapter.setOnItemClickCallback(new UserAdapter.OnItemClickCallback() {
             @Override
@@ -59,41 +63,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
     @Override
     public boolean onQueryTextSubmit(String query) {
         showLoading(true);
-        final ArrayList<User> listUsers = new ArrayList<>();
-        String url = "https://api.github.com/search/users?q=" + query;
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 7ca8cdacf2042ca26f9ffe28aff1cf333f07e830");
-        client.addHeader("User-Agent", "request");
-        client.get(url, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    //parsing json
-                    String result = new String(responseBody);
-                    Log.d("Hasil JSON", result);
-                    JSONObject responseObject = new JSONObject(result);
-                    JSONArray list = responseObject.getJSONArray("items");
-                    for (int i = 0; i < list.length(); i++) {
-                        JSONObject userItems = list.getJSONObject(i);
-                        User user = new User();
-                        user.setUserName(userItems.getString("login"));
-                        user.setPhoto(userItems.getString("avatar_url"));
-                        listUsers.add(user);
-                    }
-                    //set data ke adapter
-                    adapter.setData(listUsers);
-                    showLoading(false);
-                } catch (Exception e) {
-                    Log.d("Exception", e.getMessage());
-                }
-            }
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                showLoading(false);
-                Log.d("onFailure", error.getMessage());
-            }
-        });
+        tv_notFound.setVisibility(View.GONE);
+        mainViewModel.setListUsers(query);
         return true;
     }
 

@@ -3,7 +3,7 @@ package com.example.githubuserwithapi;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-class User implements Parcelable {
+public class User implements Parcelable {
     private String photo;
     private String name;
     private String location;

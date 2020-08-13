@@ -3,8 +3,6 @@ package com.example.githubuserwithapi.ui.main;
 import android.content.Context;
 
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
@@ -16,26 +14,27 @@ import com.example.githubuserwithapi.R;
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
 
-    private final Context mContext;
-    private final String username;
+    public final Context mContext;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm, String uname) {
+    public SectionsPagerAdapter(Context context, FragmentManager fm) {
         super(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         mContext = context;
-        username = uname;
     }
 
     public static final int[] TAB_TITLES = new int[]{
             R.string.following,
             R.string.followers
     };
+
     @Override
-    public Fragment getItem(int position) {
-        return PlaceholderFragment.newInstance(position + 1);
+    public PlaceholderFragment getItem(int position) {
+        return new PlaceholderFragment(position);
     }
+
     @Nullable
     @Override
     public CharSequence getPageTitle(int position) {
+//        ArrayList<Integer> count = PageViewModel.getCount();
         return mContext.getResources().getString(TAB_TITLES[position]);
     }
 

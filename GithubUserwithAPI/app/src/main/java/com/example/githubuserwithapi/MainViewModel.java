@@ -1,11 +1,10 @@
-package com.example.githubuserwithapi.ui.main;
+package com.example.githubuserwithapi;
 
 import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.githubuserwithapi.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -17,18 +16,18 @@ import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
 
-public class PageViewModel extends ViewModel {
-    public static int followerCount, followingCount;
+
+public class MainViewModel extends ViewModel {
     private MutableLiveData<ArrayList<User>> listUsers = new MutableLiveData<>();
 
-    public MutableLiveData<ArrayList<User>> getListFolUsers() {
+    public MutableLiveData<ArrayList<User>> getListUsers() {
         return listUsers;
     }
 
-    void setListFolUsers(final String username, final String section) {
+    void setListUsers(final String query) {
         final ArrayList<User> listItems = new ArrayList<>();
-        String url = urlSelector(username, section);
-        Log.d("URL: ", url);
+        String url = "https://api.github.com/search/users?q=" + query;
+
         AsyncHttpClient client = new AsyncHttpClient();
         client.addHeader("Authorization", "token ae3a34eb90b34f7ccb5695bbfd267a21d18959df");
         client.addHeader("User-Agent", "request");
@@ -39,7 +38,8 @@ public class PageViewModel extends ViewModel {
                     //parsing json
                     String result = new String(responseBody);
                     Log.d("Hasil JSON", result);
-                    JSONArray list = new JSONArray(result);
+                    JSONObject responseObject = new JSONObject(result);
+                    JSONArray list = responseObject.getJSONArray("items");
                     for (int i = 0; i < list.length(); i++) {
                         JSONObject userItems = list.getJSONObject(i);
                         User user = new User();
@@ -62,13 +62,5 @@ public class PageViewModel extends ViewModel {
             }
         });
     }
-
-    private String urlSelector(final String username, final String section) {
-        if (section.equals("Follower(s)")) {
-            return ("https://api.github.com/users/" + username + "/followers");
-        } else {
-            return ("https://api.github.com/users/" + username + "/following");
-        }
-    }
-
 }
+

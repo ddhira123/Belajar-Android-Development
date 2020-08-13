@@ -1,36 +1,27 @@
 package com.example.githubuserwithapi;
 
 import android.os.Bundle;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.annotation.GlideModule;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.tabs.TabLayout;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.bumptech.glide.Glide;
 import com.example.githubuserwithapi.ui.main.SectionsPagerAdapter;
+import com.google.android.material.tabs.TabLayout;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class UserDetails extends AppCompatActivity {
+
     private ProgressBar progressBar;
     CircleImageView imgPhoto;
     TextView tv_uname, tv_name, tv_company, tv_location;
@@ -49,7 +40,7 @@ public class UserDetails extends AppCompatActivity {
         imgPhoto = findViewById(R.id.imgPhoto);
         progressBar = findViewById(R.id.progressBar);
 
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager(), username);
+        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
         ViewPager viewPager = findViewById(R.id.view_pager);
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
@@ -58,10 +49,17 @@ public class UserDetails extends AppCompatActivity {
             username = getIntent().getStringExtra(EXTRA_USERNAME);
             Log.d("Success: ", username);
             showUserDetails(username);
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d("error", e.toString());
         }
 
+        try {
+            assert getSupportActionBar() != null;   //null check
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+            getSupportActionBar().setTitle("Detail User");
+        } catch (Exception e) {
+            Log.d("Error back:", e.getMessage());
+        }
     }
 
 
@@ -70,7 +68,7 @@ public class UserDetails extends AppCompatActivity {
         String url = "https://api.github.com/users/" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-        client.addHeader("Authorization", "token 7ca8cdacf2042ca26f9ffe28aff1cf333f07e830");
+        client.addHeader("Authorization", "token ae3a34eb90b34f7ccb5695bbfd267a21d18959df");
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -81,13 +79,14 @@ public class UserDetails extends AppCompatActivity {
                     Log.d("Hasil JSON", result);
                     JSONObject responseObject = new JSONObject(result);
 
-                    String name = responseObject.getString("name");
-                    String location = responseObject.getString("location");
-                    String company = responseObject.getString("company");
-                    String imgUrl = responseObject.getString("avatar_url");
+                    String name = replaceIfNull(responseObject.getString("name"));
+                    String location = replaceIfNull(responseObject.getString("location"));
+                    String company = replaceIfNull(responseObject.getString("company"));
+                    String imgUrl = replaceIfNull(responseObject.getString("avatar_url"));
 
                     tv_name.setText(name);
-                    tv_uname.setText(username);
+                    String uname = "@" + username;
+                    tv_uname.setText(uname);
                     tv_company.setText(company);
                     tv_location.setText(location);
                     Glide.with(UserDetails.this).load(imgUrl).into(imgPhoto);
@@ -104,11 +103,26 @@ public class UserDetails extends AppCompatActivity {
             }
         });
     }
+
     private void showLoading(Boolean state) {
         if (state) {
             progressBar.setVisibility(View.VISIBLE);
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private String replaceIfNull(String txt) {
+        if (txt.equals("null")) {
+            return "(Info Tidak Terseida)";
+        } else {
+            return txt;
+        }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        finish();
+        return true;
     }
 }
