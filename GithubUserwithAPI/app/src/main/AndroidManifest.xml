@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.githubuserwithapi">
     <uses-permission android:name="android.permission.INTERNET" />
     <application
@@ -10,12 +11,15 @@
         android:screenOrientation="sensor"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:targetApi="m">
         <activity
             android:name=".UserDetails"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_user_details" />
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:label="Github User">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
