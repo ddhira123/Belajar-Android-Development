@@ -17,6 +17,8 @@ import java.util.Arrays;
 import cz.msebera.android.httpclient.Header;
 import model.User;
 
+import static com.example.githubuserwithfavorites.BuildConfig.GITHUB_TOKEN;
+
 public class PageViewModel extends ViewModel {
     private final MutableLiveData<ArrayList<User>> listUsers = new MutableLiveData<>();
 
@@ -29,7 +31,7 @@ public class PageViewModel extends ViewModel {
         String url = urlSelector(username, section);
         Log.d("URL: ", url);
         AsyncHttpClient client = new AsyncHttpClient();
-//        client.addHeader("Authorization", "token ae3a34eb90b34f7ccb5695bbfd267a21d18959df");
+        client.addHeader("Authorization", new StringBuilder().append("token ").append(GITHUB_TOKEN).toString());
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

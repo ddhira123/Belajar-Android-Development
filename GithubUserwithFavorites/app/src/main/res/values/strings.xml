@@ -12,4 +12,6 @@
     <string name="content_tab_text">Ini adalah Tab</string>
     <string name="no_data">Tidak ada data.</string>
     <string name="user_not_found">User tidak ditemukan.</string>
+    <string name="fav_list">List Favorit</string>
+    <string name="settings">Pengaturan</string>
 </resources>

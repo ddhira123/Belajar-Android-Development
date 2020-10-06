@@ -43,6 +43,7 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
         if (getSupportActionBar() != null)
             getSupportActionBar().setTitle("Favorites");
 
+        progressBar = findViewById(R.id.progressBar);
         rvUsers = findViewById(R.id.fav_list);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
@@ -123,4 +124,6 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
             weakCallback.get().postExecute(users);
         }
     }
+
+
 }

@@ -30,7 +30,7 @@ public class MainViewModel extends ViewModel {
         String url = "https://api.github.com/search/users?q=" + query;
 
         AsyncHttpClient client = new AsyncHttpClient();
-//        client.addHeader("Authorization", "token ae3a34eb90b34f7ccb5695bbfd267a21d18959df");
+//        client.addHeader("Authorization", new StringBuilder().append("token ").append(GITHUB_TOKEN).toString());
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override

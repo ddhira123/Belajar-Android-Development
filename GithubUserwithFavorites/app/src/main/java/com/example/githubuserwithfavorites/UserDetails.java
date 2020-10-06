@@ -1,5 +1,6 @@
 package com.example.githubuserwithfavorites;
 
+import android.database.Cursor;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -24,6 +25,8 @@ import database.UserHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.User;
 
+import static com.example.githubuserwithfavorites.BuildConfig.GITHUB_TOKEN;
+
 public class UserDetails extends AppCompatActivity implements View.OnClickListener {
 
     public static final String EXTRA_USERNAME = "extra_username";
@@ -33,7 +36,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
     TextView tv_uname, tv_name, tv_company, tv_location;
     FloatingActionButton fab_favorite;
     private ProgressBar progressBar;
-    private boolean statusFavorite = false;
+    private boolean statusFavorite;
     private UserHelper userHelper;
 
     @Override
@@ -61,6 +64,8 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         try {
             username = getIntent().getStringExtra(EXTRA_USERNAME);
             Log.d("Success: ", username);
+            statusFavorite = getStatusFavorite();
+            setStatusFavorite();
             showUserDetails(username);
         } catch (Exception e) {
             Log.d("error", e.toString());
@@ -83,7 +88,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         String url = "https://api.github.com/users/" + username;
 
         AsyncHttpClient client = new AsyncHttpClient();
-//        client.addHeader("Authorization", "token ae3a34eb90b34f7ccb5695bbfd267a21d18959df");
+        client.addHeader("Authorization", new StringBuilder().append("token ").append(GITHUB_TOKEN).toString());
         client.addHeader("User-Agent", "request");
         client.get(url, new AsyncHttpResponseHandler() {
             @Override
@@ -146,6 +151,11 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         return true;
     }
 
+    public boolean getStatusFavorite() {
+        Cursor check = userHelper.queryByUsername(username);
+        return check.getCount() > 0;
+    }
+
     public void setStatusFavorite() {
         if (statusFavorite) {
             fab_favorite.setImageResource(R.drawable.ic_favorite_fill);
@@ -160,7 +170,6 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
             if (!statusFavorite) {
                 try {
                     long result = userHelper.insert(user);
-                    Log.d("Result code of ins:", String.valueOf(result));
 
                     if (result > 0) {
                         user.setId((int) result);
@@ -174,8 +183,9 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
                 }
             } else {
                 try {
-                    long result = userHelper.deleteById(String.valueOf(user.getId()));
+                    long result = userHelper.deleteByUsername(user.getUserName());
                     Log.d("Result code of del:", String.valueOf(result));
+
                     if (result > 0) {
                         statusFavorite = !statusFavorite;
                         setStatusFavorite();

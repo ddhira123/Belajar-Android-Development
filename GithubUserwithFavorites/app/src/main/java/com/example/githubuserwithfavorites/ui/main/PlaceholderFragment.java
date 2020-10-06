@@ -98,11 +98,5 @@ public class PlaceholderFragment extends Fragment {
                 showLoading(false);
             }
         });
-
-        adapter.setOnItemClickCallback(new UserAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(User data) {
-            }
-        });
     }
 }

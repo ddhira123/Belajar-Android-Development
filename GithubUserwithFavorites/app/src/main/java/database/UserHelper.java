@@ -46,6 +46,18 @@ public class UserHelper {
             database.close();
     }
 
+    public Cursor queryByUsername(String username) {
+        return database.query(
+                DATABASE_TABLE,
+                null,
+                USERNAME + " = ?",
+                new String[]{username},
+                null,
+                null,
+                null,
+                null);
+    }
+
     public Cursor queryAll() {
         return database.query(
                 DATABASE_TABLE,
@@ -66,7 +78,7 @@ public class UserHelper {
         return database.insert(DATABASE_TABLE, null, initialValues);
     }
 
-    public int deleteById(String id) {
-        return database.delete(DATABASE_TABLE, _ID + " = ?", new String[]{id});
+    public int deleteByUsername(String username) {
+        return database.delete(DATABASE_TABLE, USERNAME + " = ?", new String[]{username});
     }
 }
