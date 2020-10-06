@@ -63,7 +63,7 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
         try {
             assert getSupportActionBar() != null;   //null check
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
-            getSupportActionBar().setTitle("Detail User");
+            getSupportActionBar().setTitle("Favorit");
         } catch (Exception e) {
             Log.d("Error back:", e.getMessage());
         }
