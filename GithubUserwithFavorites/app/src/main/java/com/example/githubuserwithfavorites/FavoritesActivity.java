@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -58,6 +59,14 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
                 showSelectedUser(data);
             }
         });
+
+        try {
+            assert getSupportActionBar() != null;   //null check
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
+            getSupportActionBar().setTitle("Detail User");
+        } catch (Exception e) {
+            Log.d("Error back:", e.getMessage());
+        }
     }
 
     @Override
