@@ -51,7 +51,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Uri alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
 
-        Intent contentIntent = new Intent(context, MainActivity.class);
+        Intent contentIntent = new Intent(context, com.example.githubuserwithfavorites.MainActivity.class);
         PendingIntent contentPendingIntent = PendingIntent.getActivity
                 (context, notifId, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 

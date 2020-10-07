@@ -18,13 +18,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.githubuserwithfavorites.adapter.UserAdapter;
+import com.example.githubuserwithfavorites.database.DatabaseContract;
+import com.example.githubuserwithfavorites.helper.MappingHelper;
+import com.example.githubuserwithfavorites.model.User;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-
-import adapter.UserAdapter;
-import database.DatabaseContract;
-import helper.MappingHelper;
-import model.User;
 
 interface LoadUsersCallback {
     void preExecute();

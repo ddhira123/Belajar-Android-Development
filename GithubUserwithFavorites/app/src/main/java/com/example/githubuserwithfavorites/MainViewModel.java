@@ -5,6 +5,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.githubuserwithfavorites.model.User;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 
@@ -15,7 +16,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import cz.msebera.android.httpclient.Header;
-import model.User;
 
 
 public class MainViewModel extends ViewModel {

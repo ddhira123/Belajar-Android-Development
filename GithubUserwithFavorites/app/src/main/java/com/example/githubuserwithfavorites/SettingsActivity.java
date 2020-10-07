@@ -5,6 +5,8 @@ import android.view.MenuItem;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.githubuserwithfavorites.preferences.SettingPreferenceFragment;
+
 public class SettingsActivity extends AppCompatActivity {
 
 
@@ -16,7 +18,7 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);   //show back button
         getSupportActionBar().setTitle("Pengaturan");
 
-        getSupportFragmentManager().beginTransaction().add(R.id.setting_holder, new MyPreferenceFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.setting_holder, new SettingPreferenceFragment()).commit();
 
     }
 

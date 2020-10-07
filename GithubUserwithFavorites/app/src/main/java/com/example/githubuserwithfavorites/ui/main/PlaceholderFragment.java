@@ -18,11 +18,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.githubuserwithfavorites.R;
 import com.example.githubuserwithfavorites.UserDetails;
+import com.example.githubuserwithfavorites.adapter.UserAdapter;
+import com.example.githubuserwithfavorites.model.User;
 
 import java.util.ArrayList;
-
-import adapter.UserAdapter;
-import model.User;
 
 import static androidx.recyclerview.widget.RecyclerView.HORIZONTAL;
 

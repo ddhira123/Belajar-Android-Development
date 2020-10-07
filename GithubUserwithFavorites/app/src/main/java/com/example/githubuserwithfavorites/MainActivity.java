@@ -15,15 +15,15 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+import com.example.githubuserwithfavorites.adapter.UserAdapter;
+import com.example.githubuserwithfavorites.model.User;
 
-import adapter.UserAdapter;
-import model.User;
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
     private UserAdapter adapter;
     private ProgressBar progressBar;
-    private MainViewModel mainViewModel;
+    private com.example.githubuserwithfavorites.MainViewModel mainViewModel;
     private TextView tv_notFound;
 
     @Override
@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
         progressBar = findViewById(R.id.progressBar);
         tv_notFound = findViewById(R.id.tv_notFound);
-        mainViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MainViewModel.class);
+        mainViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(com.example.githubuserwithfavorites.MainViewModel.class);
         SearchView searchView = findViewById(R.id.search_box);
         searchView.setQueryHint(getResources().getString(R.string.search_hint));
         searchView.setIconifiedByDefault(false);

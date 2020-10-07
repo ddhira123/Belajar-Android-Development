@@ -114,6 +114,7 @@
         app:backgroundTint="#E91E63"
         app:elevation="6dp"
         app:fabSize="normal"
+        android:contentDescription="@string/set_fav"
         app:srcCompat="@drawable/ic_favorite_empty" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

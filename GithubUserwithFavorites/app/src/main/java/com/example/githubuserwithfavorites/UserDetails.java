@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.example.githubuserwithfavorites.model.User;
 import com.example.githubuserwithfavorites.ui.main.SectionsPagerAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
@@ -24,12 +25,11 @@ import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
-import model.User;
 
 import static com.example.githubuserwithfavorites.BuildConfig.GITHUB_TOKEN;
-import static database.DatabaseContract.UserColumns.CONTENT_URI;
-import static database.DatabaseContract.UserColumns.PHOTO_URL;
-import static database.DatabaseContract.UserColumns.USERNAME;
+import static com.example.githubuserwithfavorites.database.DatabaseContract.UserColumns.CONTENT_URI;
+import static com.example.githubuserwithfavorites.database.DatabaseContract.UserColumns.PHOTO_URL;
+import static com.example.githubuserwithfavorites.database.DatabaseContract.UserColumns.USERNAME;
 
 public class UserDetails extends AppCompatActivity implements View.OnClickListener {
 
@@ -64,10 +64,10 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
 
         try {
             username = getIntent().getStringExtra(EXTRA_USERNAME);
-            uriWithUname = Uri.parse(CONTENT_URI + "/#" + username);
+            showUserDetails(username);
+            uriWithUname = Uri.parse(CONTENT_URI + "/" + username);
             statusFavorite = getStatusFavorite();
             setStatusFavorite();
-            showUserDetails(username);
         } catch (Exception e) {
             Log.d("error", e.toString());
         }
@@ -154,10 +154,11 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
 
     public boolean getStatusFavorite() {
         if (uriWithUname != null) {
-            Log.d("URI: ", uriWithUname.toString());
+            Log.d("URI: ", uriWithUname.getLastPathSegment());
             Cursor check = getContentResolver().query(uriWithUname,
-                    null, null, null, null);
-            return check.getCount() > 0;
+                    null, username, null, null);
+            Log.d("Check cursor:", String.valueOf(check != null));
+            return check != null;
         }
         return false;
     }
@@ -165,8 +166,10 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
     public void setStatusFavorite() {
         if (statusFavorite) {
             fab_favorite.setImageResource(R.drawable.ic_favorite_fill);
+            fab_favorite.setContentDescription("Hapus dari favorit");
         } else {
             fab_favorite.setImageResource(R.drawable.ic_favorite_empty);
+            fab_favorite.setContentDescription("Favoritkan");
         }
     }
 
@@ -192,7 +195,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
                 }
             } else {
                 try {
-                    int result = getContentResolver().delete(uriWithUname, null, null);
+                    int result = getContentResolver().delete(uriWithUname, username, null);
                     Log.d("Result code of del:", String.valueOf(result));
 
                     if (result > 0) {
