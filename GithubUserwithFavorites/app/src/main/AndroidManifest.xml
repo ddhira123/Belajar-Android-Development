@@ -15,7 +15,13 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".FavoritesActivity"></activity>
+        <receiver
+            android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="true"></receiver>
+
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FavoritesActivity" />
         <activity
             android:name=".UserDetails"
             android:configChanges="orientation|screenSize|keyboardHidden"

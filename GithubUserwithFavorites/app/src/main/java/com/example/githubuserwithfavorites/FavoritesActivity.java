@@ -32,7 +32,7 @@ interface LoadUsersCallback {
 public class FavoritesActivity extends AppCompatActivity implements LoadUsersCallback {
     private UserAdapter adapter;
     private ProgressBar progressBar;
-    private TextView tv_empty;
+    private TextView tv_noDataFav;
     private UserHelper userHelper;
     private RecyclerView rvUsers;
 
@@ -45,6 +45,7 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
             getSupportActionBar().setTitle("Favorites");
 
         progressBar = findViewById(R.id.progressBar);
+        tv_noDataFav = findViewById(R.id.tv_no_data_fav);
         rvUsers = findViewById(R.id.fav_list);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
@@ -90,9 +91,10 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
         progressBar.setVisibility(View.INVISIBLE);
         if (users.size() > 0) {
             adapter.setData(users);
+            tv_noDataFav.setVisibility(View.GONE);
         } else {
             adapter.setData(new ArrayList<User>());
-            showSnackbarMessage("Anda belum memiliki pengguna kesukaan Anda.");
+            tv_noDataFav.setVisibility(View.VISIBLE);
         }
     }
 

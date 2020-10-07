@@ -111,6 +111,8 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
                 startActivity(mIntent);
                 break;
             case R.id.action_settings:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
                 break;
         }
         return super.onOptionsItemSelected(item);
