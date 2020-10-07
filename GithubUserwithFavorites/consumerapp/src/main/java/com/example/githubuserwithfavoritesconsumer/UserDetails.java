@@ -23,6 +23,8 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 import cz.msebera.android.httpclient.Header;
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -181,7 +183,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
 
                     Uri result = getContentResolver().insert(CONTENT_URI, initialValues);
                     Log.d("Last Path Segment := ", result != null ? result.getLastPathSegment() : "null");
-                    if (result.getLastPathSegment() != "0") {
+                    if (!Objects.equals(result.getLastPathSegment(), "0")) {
                         statusFavorite = !statusFavorite;
                         setStatusFavorite();
                     } else {

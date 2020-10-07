@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserDetails">
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgPhoto"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="20dp"
+                app:civ_border_color="#FF909090"
+                app:civ_border_width="2dp" />
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_toEndOf="@id/imgPhoto"
+                android:text="@string/name_place"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_userName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_name"
+                android:layout_marginHorizontal="20dp"
+                android:layout_toEndOf="@id/imgPhoto"
+                android:text="@string/username_place"
+                android:textColor="#fefefe"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_company"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_userName"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/imgPhoto"
+                android:drawablePadding="10dip"
+                android:text="@string/company"
+                android:textColor="#fefefe"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_business_24" />
+
+            <TextView
+                android:id="@+id/tv_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_company"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="6dp"
+                android:layout_toEndOf="@id/imgPhoto"
+                android:drawablePadding="10dip"
+                android:text="@string/location"
+                android:textColor="#fefefe"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_location_on_24" />
+        </RelativeLayout>
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="?attr/colorPrimary"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="#fefefe" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:contentDescription="@string/set_fav"
+        app:backgroundTint="#E91E63"
+        app:elevation="6dp"
+        app:fabSize="normal"
+        app:srcCompat="@drawable/ic_favorite_empty" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -52,8 +52,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
     }
 
     public class UserViewHolder extends RecyclerView.ViewHolder {
-        CircleImageView imgPhoto;
-        TextView tv_uname;
+        final CircleImageView imgPhoto;
+        final TextView tv_uname;
 
         public UserViewHolder(@NonNull View itemView) {
             super(itemView);

@@ -36,7 +36,6 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
     private UserAdapter adapter;
     private ProgressBar progressBar;
     private TextView tv_noDataFav;
-    private RecyclerView rvUsers;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
 
         progressBar = findViewById(R.id.progressBar);
         tv_noDataFav = findViewById(R.id.tv_no_data_fav);
-        rvUsers = findViewById(R.id.fav_list);
+        RecyclerView rvUsers = findViewById(R.id.fav_list);
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
         rvUsers.setAdapter(adapter);
@@ -108,10 +107,9 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

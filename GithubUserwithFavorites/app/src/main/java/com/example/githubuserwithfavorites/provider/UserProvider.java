@@ -5,7 +5,6 @@ import android.content.ContentValues;
 import android.content.UriMatcher;
 import android.database.Cursor;
 import android.net.Uri;
-import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -47,14 +46,11 @@ public class UserProvider extends ContentProvider {
     public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         Cursor cursor;
-        Log.d("URI at Prov:", uri.getLastPathSegment());
-        Log.d("URI Type", String.valueOf(sUriMatcher.match(uri)));
         switch (sUriMatcher.match(uri)) {
             case USER:
                 cursor = userHelper.queryAll();
                 break;
             case USER_UNAME:
-                Log.d("Ret username: ", uri.getLastPathSegment());
                 cursor = userHelper.queryByUsername(selection);
                 break;
             default:
@@ -74,13 +70,10 @@ public class UserProvider extends ContentProvider {
     @Override
     public Uri insert(Uri uri, ContentValues values) {
         long added;
-        switch (sUriMatcher.match(uri)) {
-            case USER:
-                added = userHelper.insert(values);
-                break;
-            default:
-                added = 0;
-                break;
+        if (sUriMatcher.match(uri) == USER) {
+            added = userHelper.insert(values);
+        } else {
+            added = 0;
         }
         getContext().getContentResolver().notifyChange(CONTENT_URI, null);
         return Uri.parse(CONTENT_URI + "/" + added);
@@ -93,9 +86,12 @@ public class UserProvider extends ContentProvider {
 
     @Override
     public int delete(Uri uri, String selection, String[] selectionArgs) {
-        // Implement this to handle requests to delete one or more rows.
-        Log.d("URI Type", String.valueOf(sUriMatcher.match(uri)));
-        int deleted = userHelper.deleteByUsername(selection);
+        int deleted;
+        if (sUriMatcher.match(uri) == USER_UNAME) {
+            deleted = userHelper.deleteByUsername(selection);
+        } else {
+            deleted = 0;
+        }
         getContext().getContentResolver().notifyChange(CONTENT_URI, null);
         return deleted;
     }

@@ -45,7 +45,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Toast.makeText(context, "Repeating alarm set up", Toast.LENGTH_SHORT).show();
     }
 
-    private void showAlarmNotification(Context context, String title, String message, int notifId) {
+    private void showAlarmNotification(Context context, String message) {
         String CHANNEL_ID = "Channel_1";
         String CHANNEL_NAME = "AlarmManager channel";
         NotificationManager notificationManagerCompat = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
@@ -53,11 +53,11 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Intent contentIntent = new Intent(context, com.example.githubuserwithfavorites.MainActivity.class);
         PendingIntent contentPendingIntent = PendingIntent.getActivity
-                (context, notifId, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+                (context, 101, contentIntent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         NotificationCompat.Builder builder = new NotificationCompat.Builder(context, CHANNEL_ID)
                 .setSmallIcon(R.drawable.ic_access_alarms)
-                .setContentTitle(title)
+                .setContentTitle(AlarmReceiver.TYPE_REPEATING)
                 .setContentText(message)
                 .setContentIntent(contentPendingIntent)
                 .setColor(ContextCompat.getColor(context, android.R.color.transparent))
@@ -80,7 +80,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         Notification notification = builder.build();
         if (notificationManagerCompat != null) {
-            notificationManagerCompat.notify(notifId, notification);
+            notificationManagerCompat.notify(101, notification);
         }
     }
 
@@ -88,7 +88,7 @@ public class AlarmReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         String message = intent.getStringExtra(EXTRA_MESSAGE);
         Toast.makeText(context, TYPE_REPEATING + "is activated.", Toast.LENGTH_SHORT).show();
-        showAlarmNotification(context, TYPE_REPEATING, message, ID_REPEATING);
+        showAlarmNotification(context, message);
     }
 
     public void turnOffRepeatingAlarm(Context context) {
