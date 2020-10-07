@@ -4,6 +4,8 @@
     app:iconSpaceReserved="false">
 
     <SwitchPreference
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:defaultValue="false"
         android:icon="@drawable/ic_alarm_off"
         android:key="@string/key_alarm_preference"

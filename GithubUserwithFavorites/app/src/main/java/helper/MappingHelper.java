@@ -19,4 +19,12 @@ public class MappingHelper {
         }
         return usersList;
     }
+
+    public static User mapCursorToObject(Cursor usersCursor) {
+        usersCursor.moveToFirst();
+        int id = usersCursor.getInt(usersCursor.getColumnIndexOrThrow(DatabaseContract.UserColumns._ID));
+        String username = usersCursor.getString(usersCursor.getColumnIndexOrThrow(DatabaseContract.UserColumns.USERNAME));
+        String photoURL = usersCursor.getString(usersCursor.getColumnIndexOrThrow(DatabaseContract.UserColumns.PHOTO_URL));
+        return new User(id, username, photoURL);
+    }
 }

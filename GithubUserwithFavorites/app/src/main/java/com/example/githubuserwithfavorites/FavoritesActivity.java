@@ -1,10 +1,15 @@
 package com.example.githubuserwithfavorites;
 
+import android.content.Context;
 import android.content.Intent;
+import android.database.ContentObserver;
 import android.database.Cursor;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -13,13 +18,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.snackbar.Snackbar;
-
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import adapter.UserAdapter;
-import database.UserHelper;
+import database.DatabaseContract;
 import helper.MappingHelper;
 import model.User;
 
@@ -33,7 +36,6 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
     private UserAdapter adapter;
     private ProgressBar progressBar;
     private TextView tv_noDataFav;
-    private UserHelper userHelper;
     private RecyclerView rvUsers;
 
     @Override
@@ -50,10 +52,15 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
         rvUsers.setLayoutManager(new LinearLayoutManager(this));
         adapter = new UserAdapter();
         rvUsers.setAdapter(adapter);
-        userHelper = UserHelper.getInstance(getApplicationContext());
-        userHelper.open();
+
+        HandlerThread handlerThread = new HandlerThread("DataObserver");
+        handlerThread.start();
+        Handler handler = new Handler(handlerThread.getLooper());
+        DataObserver myObserver = new DataObserver(handler, this);
+        getContentResolver().registerContentObserver(DatabaseContract.UserColumns.CONTENT_URI, true, myObserver);
+        new LoadUsersAsync(this, this).execute();
+
         adapter.notifyDataSetChanged();
-        new LoadUsersAsync(userHelper, this).execute();
         adapter.setOnItemClickCallback(new UserAdapter.OnItemClickCallback() {
             @Override
             public void onItemClicked(User data) {
@@ -73,7 +80,6 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        userHelper.close();
     }
 
     @Override
@@ -98,22 +104,28 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
         }
     }
 
-    private void showSnackbarMessage(String message) {
-        Snackbar.make(rvUsers, message, Snackbar.LENGTH_SHORT).show();
-    }
-
     private void showSelectedUser(User user) {
         Intent intent = new Intent(FavoritesActivity.this, UserDetails.class);
         intent.putExtra(UserDetails.EXTRA_USERNAME, user.getUserName());
         startActivity(intent);
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     private static class LoadUsersAsync extends AsyncTask<Void, Void, ArrayList<User>> {
-        private final WeakReference<UserHelper> weakUserHelper;
+        private final WeakReference<Context> weakContext;
         private final WeakReference<LoadUsersCallback> weakCallback;
 
-        private LoadUsersAsync(UserHelper userHelper, LoadUsersCallback callback) {
-            weakUserHelper = new WeakReference<>(userHelper);
+        private LoadUsersAsync(Context context, LoadUsersCallback callback) {
+            weakContext = new WeakReference<Context>(context);
             weakCallback = new WeakReference<>(callback);
         }
 
@@ -125,7 +137,9 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
 
         @Override
         protected ArrayList<User> doInBackground(Void... voids) {
-            Cursor dataCursor = weakUserHelper.get().queryAll();
+            Context context = weakContext.get();
+            Cursor dataCursor = context.getContentResolver().query(DatabaseContract.UserColumns.CONTENT_URI,
+                    null, null, null, null);
             return MappingHelper.mapCursorToArrayList(dataCursor);
         }
 
@@ -136,5 +150,19 @@ public class FavoritesActivity extends AppCompatActivity implements LoadUsersCal
         }
     }
 
+    public static class DataObserver extends ContentObserver {
+        final Context context;
+
+        public DataObserver(Handler handler, Context context) {
+            super(handler);
+            this.context = context;
+        }
+
+        @Override
+        public void onChange(boolean selfChange) {
+            super.onChange(selfChange);
+            new LoadUsersAsync(context, (LoadUsersCallback) context).execute();
+        }
+    }
 
 }

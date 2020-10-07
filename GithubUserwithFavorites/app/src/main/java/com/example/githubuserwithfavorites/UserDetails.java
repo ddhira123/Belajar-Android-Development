@@ -1,6 +1,8 @@
 package com.example.githubuserwithfavorites;
 
+import android.content.ContentValues;
 import android.database.Cursor;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,11 +23,13 @@ import com.loopj.android.http.AsyncHttpResponseHandler;
 import org.json.JSONObject;
 
 import cz.msebera.android.httpclient.Header;
-import database.UserHelper;
 import de.hdodenhof.circleimageview.CircleImageView;
 import model.User;
 
 import static com.example.githubuserwithfavorites.BuildConfig.GITHUB_TOKEN;
+import static database.DatabaseContract.UserColumns.CONTENT_URI;
+import static database.DatabaseContract.UserColumns.PHOTO_URL;
+import static database.DatabaseContract.UserColumns.USERNAME;
 
 public class UserDetails extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,7 +41,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
     FloatingActionButton fab_favorite;
     private ProgressBar progressBar;
     private boolean statusFavorite;
-    private UserHelper userHelper;
+    private Uri uriWithUname;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +62,9 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
 
-        userHelper = UserHelper.getInstance(getApplicationContext());
-        userHelper.open();
-
         try {
             username = getIntent().getStringExtra(EXTRA_USERNAME);
-            Log.d("Success: ", username);
+            uriWithUname = Uri.parse(CONTENT_URI + "/#" + username);
             statusFavorite = getStatusFavorite();
             setStatusFavorite();
             showUserDetails(username);
@@ -152,8 +153,13 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
     }
 
     public boolean getStatusFavorite() {
-        Cursor check = userHelper.queryByUsername(username);
-        return check.getCount() > 0;
+        if (uriWithUname != null) {
+            Log.d("URI: ", uriWithUname.toString());
+            Cursor check = getContentResolver().query(uriWithUname,
+                    null, null, null, null);
+            return check.getCount() > 0;
+        }
+        return false;
     }
 
     public void setStatusFavorite() {
@@ -169,21 +175,24 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         if (view.getId() == R.id.fab_favorite) {
             if (!statusFavorite) {
                 try {
-                    long result = userHelper.insert(user);
+                    ContentValues initialValues = new ContentValues();
+                    initialValues.put(USERNAME, user.getUserName());
+                    initialValues.put(PHOTO_URL, user.getPhoto());
 
-                    if (result > 0) {
-                        user.setId((int) result);
+                    Uri result = getContentResolver().insert(CONTENT_URI, initialValues);
+                    Log.d("Last Path Segment := ", result != null ? result.getLastPathSegment() : "null");
+                    if (result.getLastPathSegment() != "0") {
                         statusFavorite = !statusFavorite;
                         setStatusFavorite();
                     } else {
                         Toast.makeText(UserDetails.this, "Gagal menambah data", Toast.LENGTH_SHORT).show();
                     }
                 } catch (Exception e) {
-                    Log.d("Error:", String.valueOf(e.getCause()));
+                    Log.d("Error:", String.valueOf(e.getMessage()));
                 }
             } else {
                 try {
-                    long result = userHelper.deleteByUsername(user.getUserName());
+                    int result = getContentResolver().delete(uriWithUname, null, null);
                     Log.d("Result code of del:", String.valueOf(result));
 
                     if (result > 0) {

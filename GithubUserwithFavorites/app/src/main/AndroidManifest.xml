@@ -5,6 +5,13 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <permission
+        android:name="com.dicoding.mynotesapp.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="com.dicoding.mynotesapp.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -15,10 +22,18 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <provider
+            android:name=".UserProvider"
+            android:authorities="com.example.githubuserwithfavorites"
+            android:enabled="true"
+            android:exported="true"
+            android:readPermission="com.example.githubuserwithfavorites.READ_DATABASE"
+            android:writePermission="com.example.githubuserwithfavorites.WRITE_DATABASE" />
+
         <receiver
             android:name=".AlarmReceiver"
             android:enabled="true"
-            android:exported="true"></receiver>
+            android:exported="true" />
 
         <activity android:name=".SettingsActivity" />
         <activity android:name=".FavoritesActivity" />

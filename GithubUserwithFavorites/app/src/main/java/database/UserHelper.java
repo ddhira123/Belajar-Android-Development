@@ -6,13 +6,9 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
-import model.User;
 
 import static android.provider.BaseColumns._ID;
 import static database.DatabaseContract.TABLE_NAME;
-import static database.DatabaseContract.UserColumns.PHOTO_URL;
 import static database.DatabaseContract.UserColumns.USERNAME;
 
 public class UserHelper {
@@ -70,12 +66,8 @@ public class UserHelper {
                 null);
     }
 
-    public long insert(User user) {
-        ContentValues initialValues = new ContentValues();
-        initialValues.put(USERNAME, user.getUserName());
-        initialValues.put(PHOTO_URL, user.getPhoto());
-        Log.d("Uname:", user.getUserName());
-        return database.insert(DATABASE_TABLE, null, initialValues);
+    public long insert(ContentValues values) {
+        return database.insert(DATABASE_TABLE, null, values);
     }
 
     public int deleteByUsername(String username) {
