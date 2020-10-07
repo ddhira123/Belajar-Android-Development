@@ -14,4 +14,6 @@
     <string name="key_alarm_preference">alarm_preference</string>
     <string name="pref_title">Reminder pada pukul 9.00</string>
     <string name="set_fav">Favoritkan</string>
+    <string name="app_splash_title">GUF App</string>
+    <string name="app_splash_subtitle">An App to get the Github Users</string>
 </resources>

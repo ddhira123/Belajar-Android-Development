@@ -158,9 +158,11 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
         if (uriWithUname != null) {
             Log.d("URI: ", uriWithUname.getLastPathSegment());
             Cursor check = getContentResolver().query(uriWithUname,
-                    null, username, null, null);
+                    null, null, null, null);
             Log.d("Check cursor:", String.valueOf(check != null));
-            return check != null;
+            boolean status = check != null;
+            check.close();
+            return status;
         }
         return false;
     }
@@ -197,7 +199,7 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
                 }
             } else {
                 try {
-                    int result = getContentResolver().delete(uriWithUname, username, null);
+                    int result = getContentResolver().delete(uriWithUname, null, null);
                     Log.d("Result code of del:", String.valueOf(result));
 
                     if (result > 0) {

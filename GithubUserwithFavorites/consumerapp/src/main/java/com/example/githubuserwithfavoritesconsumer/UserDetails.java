@@ -159,7 +159,10 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
             Log.d("URI: ", uriWithUname.getLastPathSegment());
             Cursor check = getContentResolver().query(uriWithUname,
                     null, null, null, null);
-            return check != null;
+            Log.d("Check cursor:", String.valueOf(check != null));
+            boolean status = check != null;
+            check.close();
+            return status;
         }
         return false;
     }
@@ -167,8 +170,10 @@ public class UserDetails extends AppCompatActivity implements View.OnClickListen
     public void setStatusFavorite() {
         if (statusFavorite) {
             fab_favorite.setImageResource(R.drawable.ic_favorite_fill);
+            fab_favorite.setContentDescription("Hapus dari favorit");
         } else {
             fab_favorite.setImageResource(R.drawable.ic_favorite_empty);
+            fab_favorite.setContentDescription("Favoritkan");
         }
     }
 

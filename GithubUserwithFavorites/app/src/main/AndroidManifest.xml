@@ -22,8 +22,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
+        <activity
+            android:name=".SplashScreenActivity"
+            android:noHistory="true"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
         <provider
-            android:name="com.example.githubuserwithfavorites.provider.UserProvider"
+            android:name=".provider.UserProvider"
             android:authorities="com.example.githubuserwithfavorites"
             android:enabled="true"
             android:exported="true"
@@ -31,18 +42,18 @@
             android:writePermission="com.example.githubuserwithfavorites.WRITE_DATABASE" />
 
         <receiver
-            android:name="com.example.githubuserwithfavorites.AlarmReceiver"
+            android:name=".AlarmReceiver"
             android:enabled="true"
             android:exported="true" />
 
-        <activity android:name="com.example.githubuserwithfavorites.SettingsActivity" />
-        <activity android:name="com.example.githubuserwithfavorites.FavoritesActivity" />
+        <activity android:name=".SettingsActivity" />
+        <activity android:name=".FavoritesActivity" />
         <activity
-            android:name="com.example.githubuserwithfavorites.UserDetails"
+            android:name=".UserDetails"
             android:configChanges="orientation|screenSize|keyboardHidden"
             android:label="@string/title_activity_user_details" />
         <activity
-            android:name="com.example.githubuserwithfavorites.MainActivity"
+            android:name=".MainActivity"
             android:label="Github User">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

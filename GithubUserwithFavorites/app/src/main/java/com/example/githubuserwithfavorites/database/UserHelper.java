@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import static android.provider.BaseColumns._ID;
 import static com.example.githubuserwithfavorites.database.DatabaseContract.TABLE_NAME;
@@ -43,7 +44,7 @@ public class UserHelper {
     }
 
     public Cursor queryByUsername(String username) {
-        return database.query(
+        Cursor c = database.query(
                 DATABASE_TABLE,
                 null,
                 USERNAME + " = ?",
@@ -52,6 +53,9 @@ public class UserHelper {
                 null,
                 null,
                 null);
+        c.moveToFirst();
+        Log.d("The query result: ", c.getString(c.getColumnIndex(USERNAME)));
+        return c;
     }
 
     public Cursor queryAll() {

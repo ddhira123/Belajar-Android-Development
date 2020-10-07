@@ -51,7 +51,7 @@ public class UserProvider extends ContentProvider {
                 cursor = userHelper.queryAll();
                 break;
             case USER_UNAME:
-                cursor = userHelper.queryByUsername(selection);
+                cursor = userHelper.queryByUsername(uri.getLastPathSegment());
                 break;
             default:
                 cursor = null;
@@ -88,7 +88,7 @@ public class UserProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         int deleted;
         if (sUriMatcher.match(uri) == USER_UNAME) {
-            deleted = userHelper.deleteByUsername(selection);
+            deleted = userHelper.deleteByUsername(uri.getLastPathSegment());
         } else {
             deleted = 0;
         }
