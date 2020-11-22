@@ -1,0 +1,104 @@
+{
+    "movies": [
+        {
+            "id": "0",
+            "title": "X-Men",
+            "storyline": "In a world where mutants (evolved super-powered humans) exist and are discriminated against, two groups form for an inevitable clash: the supremacist Brotherhood, and the pacifist X-Men.",
+            "year": "2000",
+            "stars": "Patrick Stewart, Hugh Jackman, Ian McKellen",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "7.4",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BZmIyMDk5NGYtYjQ5NS00ZWQxLTg2YzQtZDk1ZmM4ZDBlN2E3XkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_SX300.jpg"
+        },
+        {
+            "id": "1",
+            "title": "X-Men 2",
+            "storyline": "Several months have passed since the X-Men defeated Magneto and imprisoned him in a seemingly impregnable plastic chamber. One day, a mutant by the name of Nightcrawler infiltrates the White House and attempts to assassinate the President, setting off a chain reaction of anti-mutant measures by the government. Meanwhile, Logan is trying to discover his past. As scientist named William Stryker discovers Professor X's secret school and Cerebro, Magneto's partner, Mystique, is planning to break her leader out of prison. But when Professor X's school is attacked by Stryker's forces, Logan, Rogue, Iceman, and a few are lucky to escape. Those who remain meet in Boston, where they form an uneasy alliance with Magneto to stop Stryker and rescue Professor X",
+            "year": "2003",
+            "stars": "Patrick Stewart, Hugh Jackman, Halle Berry",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "7.4",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BNDk0NjYxMzIzOF5BMl5BanBnXkFtZTYwMTc1MjU3._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "2",
+            "title": "X-Men: The Last Stand",
+            "storyline": "When a \"cure\" is created, which apparently can turn any mutant into a \"normal\" human being, there is outrage amongst the mutant community. While some mutants do like the idea of a \"cure\", including Rogue, many mutants find that there shouldn't be a \"cure\". Magneto, who still believes a war is coming, recruits a large team of mutants to take down Warren Worthington II and his \"cure\". Might seem easy for the X-Men to stop, but Magneto has a big advantage, which Wolverine doesn't have. Jean Grey has returned, and joined with Magneto. The Dark Phoenix has woken within her, which has the ability to destroy anything in her way, even if that \"anything\" is an X-Man.",
+            "year": "2006",
+            "stars": "Patrick Stewart, Hugh Jackman, Halle Berry",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "6.7",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BNDBhNDJiMWEtOTg4Yi00NTYzLWEzOGMtMjNmNjAxNTBlMzY3XkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UY268_CR1,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "3",
+            "title": "X-Men Origins: Wolverine",
+            "storyline": "Two mutant brothers, Logan and Victor, born two hundred years ago, suffer childhood trauma and have only each other to depend on. Basically, they're fighters and killers, living from war to war throughout U.S. history. In modern times, a U.S. Colonel, Stryker, recruits them and other mutants as commandos. Logan quits and becomes a logger, falling in love with a local teacher. When Logan refuses to rejoin Stryker's crew, the Colonel sends the murderous Victor. Logan now wants revenge.",
+            "year": "2009",
+            "stars": "Hugh Jackman, Liev Schreiber, Ryan Reynolds",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "6.6",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BZWRhMzdhMzEtZTViNy00YWYyLTgxZmUtMTMwMWM0NTEyMjk3XkEyXkFqcGdeQXVyNTIzOTk5ODM@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "4",
+            "title": "X-Men: First Class",
+            "storyline": "Before Charles Xavier and Erik Lensherr took the names Professor X and Magneto, they were two young men discovering their powers for the first time. Before they were archenemies, they were closest of friends, working together, with other Mutants (some familiar, some new), to stop the greatest threat the world has ever known. In the process, a rift between them opened, which began the eternal war between Magneto's Brotherhood and Professor X's X-MEN.",
+            "year": "2011",
+            "stars": "James McAvoy, Michael Fassbender, Jennifer Lawrence",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "7.7",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BMTg5OTMxNzk4Nl5BMl5BanBnXkFtZTcwOTk1MjAwNQ@@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "5",
+            "title": "The Wolverine",
+            "storyline": "In modern day Japan, Wolverine is out of his depth in an unknown world as he faces his ultimate nemesis in a life-or-death battle that will leave him forever changed. Vulnerable for the first time and pushed to his physical and emotional limits, he confronts not only lethal samurai steel but also his inner struggle against his own near-immortality, emerging more powerful than we have ever seen him before.",
+            "year": "2013",
+            "stars": "Hugh Jackman, Will Yun Lee, Tao Okamoto",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "6.7",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BNzg1MDQxMTQ2OF5BMl5BanBnXkFtZTcwMTk3MjAzOQ@@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "6",
+            "title": "X-Men: Days of Future Past",
+            "storyline": "In the future, the mutants and the humans who help them are slaughtered by powerful robots named Sentinels. Professor Xavier, Wolverine, Magneto, Storm, Kitty Pryde, and her friends meet at a monastery in China and Xavier explains that the invincible Sentinels were created using the DNA of Mystique that was captured in 1973 when she tried to assassinate their creator Dr. Bolivar Trask. Xavier tells that their only chance is return to 1973 using Pryde's ability to join Charles Xavier and Erik Lehnsherr to convince Mystique to give up her intention. However, only Wolverine can withstand the damages of the time travel. Will he succeed in stopping Mystique and the Sentinel Program, and save the mutants and their human friends from annihilation?",
+            "year": "2014",
+            "stars": "Patrick Stewart, Ian McKellen, Hugh Jackman",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "7.9",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BZGIzNWYzN2YtMjcwYS00YjQ3LWI2NjMtOTNiYTUyYjE2MGNkXkEyXkFqcGdeQXVyMTQxNzMzNDI@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "7",
+            "title": "X-Men: Apocalypse",
+            "storyline": "Since the dawn of civilization, he was worshiped as a god. Apocalypse, the first and most powerful mutant from Marvel's X-Men universe, amassed the powers of many other mutants, becoming immortal and invincible. Upon awakening after thousands of years, he is disillusioned with the world as he finds it and recruits a team of powerful mutants, including a disheartened Magneto, to cleanse mankind and create a new world order, over which he will reign. As the fate of the Earth hangs in the balance, Raven with the help of Professor X must lead a team of young X-Men to stop their greatest nemesis and save mankind from complete destruction.",
+            "year": "2016",
+            "stars": "James McAvoy, Michael Fassbender, Jennifer Lawrence",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "6.9",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BMjU1ODM1MzYxN15BMl5BanBnXkFtZTgwOTA4NDE2ODE@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "8",
+            "title": "Logan",
+            "storyline": "In 2029 the mutant population has shrunken significantly due to genetically modified plants designed to reduce mutant powers and the X-Men have disbanded. Logan, whose power to self-heal is dwindling, has surrendered himself to alcohol and now earns a living as a chauffeur. He takes care of the ailing old Professor X whom he keeps hidden away. One day, a female stranger asks Logan to drive a girl named Laura to the Canadian border. At first he refuses, but the Professor has been waiting for a long time for her to appear. Laura possesses an extraordinary fighting prowess and is in many ways like Wolverine. She is pursued by sinister figures working for a powerful corporation; this is because they made her, with Logan's DNA. A decrepit Logan is forced to ask himself if he can or even wants to put his remaining powers to good use. It would appear that in the near-future, the times in which they were able put the world to rights with razor sharp claws and telepathic powers are now over.",
+            "year": "2017",
+            "stars": "Hugh Jackman, Patrick Stewart, Dafne Keen",
+            "genre": "Action, Drama, Sci-Fi",
+            "rating": "8.1",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BYzc5MTU4N2EtYTkyMi00NjdhLTg3NWEtMTY4OTEyMzJhZTAzXkEyXkFqcGdeQXVyNjc1NTYyMjg@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        },
+        {
+            "id": "9",
+            "title": "X-Men: Dark Phoenix",
+            "storyline": "The X-Men. Protectors of peace. Jean Grey is one of the most beloved X-Men. But when a mission goes wrong, Jean is exposed to a dark and ancient power. This power has destroyed everything it comes in contact with, until her. Now that this power is becoming unstable, she releases it with destruction and anger. Now that this foreign power is consuming her, and the world is threatened, the X-Men have to face an important truth: they must save either the world, or their friend who threatens it.",
+            "year": "2019",
+            "stars": "James McAvoy, Michael Fassbender, Jennifer Lawrence",
+            "genre": "Action, Adventure, Sci-Fi",
+            "rating": "5.8",
+            "imagePath": "https://m.media-amazon.com/images/M/MV5BMmZmYTgwZGItNDIxMS00MmRkLWEzODQtYTllNzM0ZWE1NmQ5XkEyXkFqcGdeQXVyODQzNTE3ODc@._V1_UX182_CR0,0,182,268_AL_.jpg"
+        }
+    ]
+}

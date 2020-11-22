@@ -1,0 +1,104 @@
+{
+  "tvShows": [
+    {
+      "id": "0",
+      "title": "Band of Brothers",
+      "storyline": "This is the story of \"E\" Easy Company, 506th Regiment of the 101st Airborne Division from their initial training starting in 1942 to the end of World War II. They parachuted behind enemy lines in the early hours of D-Day in support of the landings at Utah beach, participated in the liberation of Carentan and again parachuted into action during Operation Market Garden. They also liberated a concentration camp and were the first to enter Hitler's mountain retreat in Berchtesgaden. A fascinating tale of comradeship that is, in the end, a tale of ordinary men who did extraordinary things.",
+      "genre": "Action, Drama, History",
+      "year": "2001",
+      "stars": "Scott Grimes, Damian Lewis, Ron Livingston",
+      "rating": "9.4",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BMTI3ODc2ODc0M15BMl5BanBnXkFtZTYwMjgzNjc3._V1_UX182_CR0,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "1",
+      "title": "The Wire",
+      "storyline": "Set in Baltimore, this show centers around the city's inner-city drug scene. It starts as mid-level drug dealer, D'Angelo Barksdale beats a murder rap. After a conversation with a judge, Det. James McNulty has been assigned to lead a joint homicide and narcotics team, in order to bring down drug kingpin Avon Barksdale. Avon Barksdale, accompanied by his right-hand man Stringer Bell, enforcer Wee-Bey and many lieutenants (including his own nephew, D'Angelo Barksdale), has to deal with law enforcement, informants in his own camp, and competition with a local rival, Omar, who's been robbing Barksdale's dealers and reselling the drugs. The supervisor of the investigation, Lt. Cedric Daniels, has to deal with his own problems, such as a corrupt bureaucracy, some of his detectives beating suspects, hard-headed but determined Det. McNulty, and a blackmailing deputy. The show depicts the lives of every part of the drug \"food chain\", from junkies to dealers, and from cops to politicians.",
+      "genre": "Crime, Drama, Thriller",
+      "year": "2002-2008",
+      "stars": "Dominic West, Lance Reddick, Sonja Sohn",
+      "rating": "9.3",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BZmY5ZDMxODEtNWIwOS00NjdkLTkyMjktNWRjMDhmYjJjN2RmXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_UX182_CR0,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "2",
+      "title": "Avatar: The Last Airbender",
+      "storyline": "The world is divided into four elemental nations: The Northern and Southern Water Tribes, the Earth Kingdom, the Fire Nation, and the Air Nomads. The Avatar upholds the balance between the nations, but everything changed when the Fire Nation invaded. Only the Avatar, master of all four elements, can stop them. But when the world needs him most, he vanishes. A hundred years later Katara and Sokka discover the new Avatar, an airbender named Aang. Together they must help Aang master the elements and save the world.",
+      "genre": "Animation, Action, Adventure",
+      "year": "2005-2008",
+      "stars": "Zach Tyler, Mae Whitman, Jack De Sena",
+      "rating": "9.2",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BODc5YTBhMTItMjhkNi00ZTIxLWI0YjAtNTZmOTY0YjRlZGQ0XkEyXkFqcGdeQXVyODUwNjEzMzg@._V1_UX182_CR0,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "3",
+      "title": "Life",
+      "storyline": "David Attenborough's legendary BBC crew explains and shows wildlife all over planet earth in 10 episodes. The first is an overview of the challenges facing life, the others are dedicated to hunting, the deep sea and various major evolutionary groups of creatures: plants, primates and other large sections of other vertebrates and invertebrates.",
+      "genre": "Documentary",
+      "year": "2009",
+      "stars": "Oprah Winfrey, David Attenborough",
+      "rating": "9.1",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BNjJhMTAxZjYtNWZkYy00Nzg1LTlkYjItZTNhZWRjNzkxMDg3XkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_UY268_CR3,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "4",
+      "title": "Fullmetal Alchemist: Brotherhood",
+      "storyline": "Two brothers lose their mother to an incurable disease. With the power of \"alchemy\", they use taboo knowledge to resurrect her. The process fails, and as a toll for using this type of alchemy, the older brother, Edward Elric loses his left leg while the younger brother, Alphonse Elric loses his entire body. To save his brother, Edward sacrifices his right arm and is able to affix his brother's soul to a suit of armor. With the help of a family friend, Edward receives metal limbs - \"automail\" - to replace his lost ones. With that, Edward vows to search for the Philosopher's Stone to return the brothers to their original bodies, even if it means becoming a \"State Alchemist\", one who uses his/her alchemy for the military.",
+      "genre": "Animation, Action, Adventure",
+      "year": "2009-2012",
+      "stars": "Kent Williams, Iemasa Kayumi, Vic Mignogna",
+      "rating": "9.1",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BZmEzN2YzOTItMDI5MS00MGU4LWI1NWQtOTg5ZThhNGQwYTEzXkEyXkFqcGdeQXVyNTA4NzY1MzY@._V1_UY268_CR4,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "5",
+      "title": "Sherlock",
+      "storyline": "In this modernized version of the Conan Doyle characters, using his detective plots, Sherlock Holmes lives in early 21st century London and acts more cocky towards Scotland Yard's detective inspector Lestrade because he's actually less confident. Doctor Watson is now a fairly young veteran of the Afghan war, less adoring and more active.",
+      "genre": "Crime, Drama, Mystery",
+      "year": "2010-2017",
+      "stars": "Benedict Cumberbatch, Martin Freeman, Una Stubbs",
+      "rating": "9.1",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BMWY3NTljMjEtYzRiMi00NWM2LTkzNjItZTVmZjE0MTdjMjJhL2ltYWdlL2ltYWdlXkEyXkFqcGdeQXVyNTQ4NTc5OTU@._V1_UX182_CR0,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "6",
+      "title": "Planet Earth",
+      "storyline": "Each 50 minute episode features a global overview of a different biome or habitat on Earth (Polar, Mountain, Cave, Desert, Plains, Fresh Water, Seas, Ocean, Forest), followed by a ten-minute featurette which takes a behind-the-scenes look at the challenges of filming the episode.",
+      "genre": "Documentary",
+      "year": "2006",
+      "stars": "David Attenborough, Sigourney Weaver, Thomas Anguti Johnston",
+      "rating": "9.4",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BNmZlYzIzMTItY2EzYS00YTEyLTg0ZjEtMDMzZjM3ODdhN2UzXkEyXkFqcGdeQXVyNjI0MDg2NzE@._V1_UX182_CR0,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "7",
+      "title": "Game of Thrones",
+      "storyline": "In the mythical continent of Westeros, several powerful families fight for control of the Seven Kingdoms. As conflict erupts in the kingdoms of men, an ancient enemy rises once again to threaten them all. Meanwhile, the last heirs of a recently usurped dynasty plot to take back their homeland from across the Narrow Sea.",
+      "genre": "Action, Adventure, Drama",
+      "year": "2011-2019",
+      "stars": "Emilia Clarke, Peter Dinklage, Kit Harington",
+      "rating": "9.3",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BYTRiNDQwYzAtMzVlZS00NTI5LWJjYjUtMzkwNTUzMWMxZTllXkEyXkFqcGdeQXVyNDIzMzcwNjc@._V1_UY268_CR7,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "8",
+      "title": "Persona (Sahsiyet)",
+      "storyline": "Agâh is a retired 65-year-old judicial clerk, who crosses roads with Nevra, the only female police officer in the homicide office. Is it only a coincidence that Agâh and Nevra approach each other? Agâh Beyoglu, a retired judicial officer, is living alone in Beyoglu, Istanbul's most populous and lively district. His daughter lived abroad, his wife died years ago. This monotonous life of Agâh is upset by the diagnosis of Alzheimer's beginning. He will forget all his memories because of his illness. Even if we do not accept this fact at first, Agâh realizes that forgetting is an opportunity. An opportunity to commit a murder he has planned for years. He will not remember this crime in the future and he will not take remorse for not remembering it. Meanwhile, Nevra, the female police officer in the murder desk, was on the verge of resignation because of the pressure on her. However, the murder decision of Agâh will completely change the life of Nevra.",
+      "genre": "Crime, Drama, Mystery",
+      "year": "2018",
+      "stars": "Haluk Bilginer, Cansu Dere, Metin Akdülger",
+      "rating": "9.1",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BOTJkNzJmYzgtZTZmNC00MTQ2LWE2ZGQtM2EyYjliNGViMTY5XkEyXkFqcGdeQXVyNDg4MjkzNDk@._V1_UY268_CR4,0,182,268_AL_.jpg"
+    },
+    {
+      "id": "9",
+      "title": "Batman: The Animated Series",
+      "storyline": "Heir to the Wayne family fortune, Bruce Wayne (Kevin Conroy) lives by day as a seemingly lavish playboy millionaire socialite, but by night assumes the role of his crime-fighting alter-ego: the caped crusader known as Batman. Throughout the show, Batman receives help from sidekicks Robin (Loren Lester) and Batgirl (Melissa Gilbert), as well as Police Commissioner Gordon (Bob Hastings), in protecting the streets of Gotham City from a large rogue's gallery of criminals, lunatics, and nemeses.",
+      "genre": "Animation, Action, Adventure",
+      "year": "1992-1995",
+      "stars": "Kevin Conroy, Loren Lester, Efrem Zimbalist Jr.",
+      "rating": "9.0",
+      "imagePath": "https://m.media-amazon.com/images/M/MV5BOTM3MTRkZjQtYjBkMy00YWE1LTkxOTQtNDQyNGY0YjYzNzAzXkEyXkFqcGdeQXVyOTgwMzk1MTA@._V1_UX182_CR0,0,182,268_AL_.jpg"
+    }
+  ]
+}
