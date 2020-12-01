@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class TVShowFragment extends Fragment {
     private RecyclerView rvTVShow;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class TVShowFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvTVShow = view.findViewById(R.id.rv_items);
+        progressBar = view.findViewById(R.id.progress_bar);
     }
 
     @Override
@@ -38,9 +41,14 @@ public class TVShowFragment extends Fragment {
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
             TVShowViewModel tvShowViewModel = new ViewModelProvider(this, factory).get(TVShowViewModel.class);
-            List<TVShowEntity> tvShows = tvShowViewModel.getTVShows();
             TVShowAdapter tvShowAdapter = new TVShowAdapter();
-            tvShowAdapter.setTVShows(tvShows);
+            progressBar.setVisibility(View.VISIBLE);
+            tvShowViewModel.getTVShows().observe(getViewLifecycleOwner(), tvShows -> {
+                        progressBar.setVisibility(View.GONE);
+                        tvShowAdapter.setTVShows(tvShows);
+                        tvShowAdapter.notifyDataSetChanged();
+                    }
+            );
             rvTVShow.setLayoutManager(new GridLayoutManager(getContext(), 2));
             rvTVShow.setHasFixedSize(true);
             rvTVShow.setAdapter(tvShowAdapter);

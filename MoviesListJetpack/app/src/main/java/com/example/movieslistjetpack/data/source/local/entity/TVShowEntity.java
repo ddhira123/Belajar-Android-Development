@@ -2,7 +2,7 @@ package com.example.movieslistjetpack.data.source.local.entity;
 
 public class TVShowEntity {
 
-    private String id;
+    private final String id;
     private final String title;
     private final String storyline;
     private final String genre;

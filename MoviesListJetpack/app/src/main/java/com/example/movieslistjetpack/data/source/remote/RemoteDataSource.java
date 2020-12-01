@@ -10,8 +10,8 @@ import java.util.List;
 
 public class RemoteDataSource {
     private static RemoteDataSource INSTANCE;
-    private JsonHelper jsonHelper;
-    private Handler handler = new Handler();
+    private final JsonHelper jsonHelper;
+    private final Handler handler = new Handler();
     private final long SERVICE_LATENCY_IN_MILLIS = 2000;
 
     private RemoteDataSource(JsonHelper jsonHelper) {
@@ -25,13 +25,19 @@ public class RemoteDataSource {
         return INSTANCE;
     }
 
-    public List<MovieResponse> getAllMovies(){
-        return jsonHelper.loadMovies();
+    public void getAllMovies(LoadMoviesCallback loadMoviesCallback){
+        handler.postDelayed(()-> loadMoviesCallback.onAllMoviesReceived(jsonHelper.loadMovies()), SERVICE_LATENCY_IN_MILLIS);
     }
 
-    public List<TVShowResponse> getAllTVShows(){
-        return jsonHelper.loadTVShows();
+    public void getAllTVShows(LoadTVShowsCallback loadTVShowsCallback){
+        handler.postDelayed(()-> loadTVShowsCallback.onAllTVShowsReceived(jsonHelper.loadTVShows()), SERVICE_LATENCY_IN_MILLIS);
     }
 
+    public interface LoadMoviesCallback {
+        void onAllMoviesReceived(List<MovieResponse> movieResponses);
+    }
 
+    public interface LoadTVShowsCallback {
+        void onAllTVShowsReceived(List<TVShowResponse> tvShowResponses);
+    }
 }

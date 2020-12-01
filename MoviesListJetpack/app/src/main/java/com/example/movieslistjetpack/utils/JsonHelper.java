@@ -1,7 +1,6 @@
 package com.example.movieslistjetpack.utils;
 
 import android.content.Context;
-import android.graphics.Movie;
 
 import com.example.movieslistjetpack.data.source.remote.response.MovieResponse;
 import com.example.movieslistjetpack.data.source.remote.response.TVShowResponse;
@@ -16,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class JsonHelper {
-    private Context context;
+    private final Context context;
 
     public JsonHelper(Context context) {
         this.context = context;

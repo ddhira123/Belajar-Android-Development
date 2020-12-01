@@ -1,5 +1,6 @@
 package com.example.movieslistjetpack.ui.detail;
 
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.movieslistjetpack.data.source.local.entity.MovieEntity;
@@ -8,7 +9,7 @@ import com.example.movieslistjetpack.data.source.CatalogueRepository;
 
 public class DetailViewModel extends ViewModel {
     private String id;
-    private CatalogueRepository catalogueRepository;
+    private final CatalogueRepository catalogueRepository;
 
     public DetailViewModel(CatalogueRepository catalogueRepository) {
         this.catalogueRepository = catalogueRepository;
@@ -18,11 +19,11 @@ public class DetailViewModel extends ViewModel {
         this.id = id;
     }
 
-    public MovieEntity getMovie() {
+    public LiveData<MovieEntity> getMovie() {
         return catalogueRepository.getMovieById(this.id);
     }
 
-    public TVShowEntity getTVShow() {
+    public LiveData<TVShowEntity> getTVShow() {
         return catalogueRepository.getTVShowById(this.id);
     }
 }

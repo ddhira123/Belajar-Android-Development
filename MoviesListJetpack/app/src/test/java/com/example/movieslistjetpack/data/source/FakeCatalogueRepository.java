@@ -1,5 +1,8 @@
 package com.example.movieslistjetpack.data.source;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.movieslistjetpack.data.source.local.entity.MovieEntity;
 import com.example.movieslistjetpack.data.source.local.entity.TVShowEntity;
 import com.example.movieslistjetpack.data.source.remote.CatalogueDataSource;
@@ -19,31 +22,12 @@ public class FakeCatalogueRepository implements CatalogueDataSource {
     }
 
     @Override
-    public List<MovieEntity> getAllMovies() {
-        List<MovieResponse> movieResponses = remoteDataSource.getAllMovies();
-        ArrayList<MovieEntity> movieList = new ArrayList<>();
-        for (MovieResponse response : movieResponses) {
-            MovieEntity movieEntity = new MovieEntity(response.getMovieId(),
-                    response.getTitle(),
-                    response.getStoryline(),
-                    response.getYear(),
-                    response.getStars(),
-                    response.getGenre(),
-                    response.getRating(),
-                    response.getImgPath());
-
-            movieList.add(movieEntity);
-        }
-        return movieList;
-    }
-
-    @Override
-    public MovieEntity getMovieById(String id) {
-        List<MovieResponse> movieResponses = remoteDataSource.getAllMovies();
-        MovieEntity movieEntity = null;
-        for (MovieResponse response : movieResponses) {
-            if(response.getMovieId().equals(id)){
-                movieEntity = new MovieEntity(response.getMovieId(),
+    public LiveData<List<MovieEntity>> getAllMovies() {
+        MutableLiveData<List<MovieEntity>> movieResults = new MutableLiveData<>();
+        remoteDataSource.getAllMovies(movieResponses -> {
+            ArrayList < MovieEntity > movieList = new ArrayList<>();
+            for (MovieResponse response : movieResponses) {
+                MovieEntity movieEntity = new MovieEntity(response.getMovieId(),
                         response.getTitle(),
                         response.getStoryline(),
                         response.getYear(),
@@ -51,37 +35,44 @@ public class FakeCatalogueRepository implements CatalogueDataSource {
                         response.getGenre(),
                         response.getRating(),
                         response.getImgPath());
+
+                movieList.add(movieEntity);
             }
-        }
-        return movieEntity;
+            movieResults.postValue(movieList);
+        });
+        return movieResults;
     }
 
     @Override
-    public List<TVShowEntity> getAllTVShows() {
-        List<TVShowResponse> tvShowResponses = remoteDataSource.getAllTVShows();
-        ArrayList<TVShowEntity> tvShowList = new ArrayList<>();
-        for (TVShowResponse response : tvShowResponses) {
-            TVShowEntity tvShowEntity = new TVShowEntity(response.getTVShowId(),
-                    response.getTitle(),
-                    response.getStoryline(),
-                    response.getGenre(),
-                    response.getYear(),
-                    response.getStars(),
-                    response.getRating(),
-                    response.getImgPath());
+    public LiveData<MovieEntity> getMovieById(String id) {
+        MutableLiveData<MovieEntity> movieEntityResult = new MutableLiveData<>();
+        remoteDataSource.getAllMovies(movieResponses -> {
+            MovieEntity movieEntity = null;
+            for (MovieResponse response : movieResponses) {
+                if(response.getMovieId().equals(id)){
+                    movieEntity = new MovieEntity(response.getMovieId(),
+                            response.getTitle(),
+                            response.getStoryline(),
+                            response.getYear(),
+                            response.getStars(),
+                            response.getGenre(),
+                            response.getRating(),
+                            response.getImgPath());
+                }
+            }
+            movieEntityResult.postValue(movieEntity);
+        });
 
-            tvShowList.add(tvShowEntity);
-        }
-        return tvShowList;
+        return movieEntityResult;
     }
 
     @Override
-    public TVShowEntity getTVShowById(String id) {
-        List<TVShowResponse> tvShowResponses = remoteDataSource.getAllTVShows();
-        TVShowEntity tvShowEntity = null;
-        for (TVShowResponse response : tvShowResponses) {
-            if(response.getTVShowId().equals(id)){
-                tvShowEntity = new TVShowEntity(response.getTVShowId(),
+    public LiveData<List<TVShowEntity>> getAllTVShows() {
+        MutableLiveData<List<TVShowEntity>> tvShowResults = new MutableLiveData<>();
+        remoteDataSource.getAllTVShows(tvShowResponses -> {
+            ArrayList<TVShowEntity> tvShowList = new ArrayList<>();
+            for (TVShowResponse response : tvShowResponses) {
+                TVShowEntity tvShowEntity = new TVShowEntity(response.getTVShowId(),
                         response.getTitle(),
                         response.getStoryline(),
                         response.getGenre(),
@@ -89,8 +80,35 @@ public class FakeCatalogueRepository implements CatalogueDataSource {
                         response.getStars(),
                         response.getRating(),
                         response.getImgPath());
+
+                tvShowList.add(tvShowEntity);
             }
-        }
-        return tvShowEntity;
+            tvShowResults.postValue(tvShowList);
+        });
+
+        return tvShowResults;
+    }
+
+    @Override
+    public LiveData<TVShowEntity> getTVShowById(String id) {
+        MutableLiveData<TVShowEntity> tvShowEntityResult = new MutableLiveData<>();
+        remoteDataSource.getAllTVShows(tvShowResponses -> {
+            TVShowEntity tvShowEntity = null;
+            for (TVShowResponse response : tvShowResponses) {
+                if(response.getTVShowId().equals(id)){
+                    tvShowEntity = new TVShowEntity(response.getTVShowId(),
+                            response.getTitle(),
+                            response.getStoryline(),
+                            response.getGenre(),
+                            response.getYear(),
+                            response.getStars(),
+                            response.getRating(),
+                            response.getImgPath());
+                }
+            }
+            tvShowEntityResult.postValue(tvShowEntity);
+        });
+
+        return tvShowEntityResult;
     }
 }

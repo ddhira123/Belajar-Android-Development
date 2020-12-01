@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import java.util.List;
 
 public class MovieFragment extends Fragment {
     private RecyclerView rvMovie;
+    private ProgressBar progressBar;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -30,6 +32,7 @@ public class MovieFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rvMovie = view.findViewById(R.id.rv_items);
+        progressBar = view.findViewById(R.id.progress_bar);
     }
 
     @Override
@@ -38,9 +41,14 @@ public class MovieFragment extends Fragment {
         if (getActivity() != null) {
             ViewModelFactory factory = ViewModelFactory.getInstance(getActivity());
             MovieViewModel movieViewModel = new ViewModelProvider(this, factory).get(MovieViewModel.class);
-            List<MovieEntity> movies = movieViewModel.getMovies();
             MovieAdapter movieAdapter = new MovieAdapter();
-            movieAdapter.setMovies(movies);
+            progressBar.setVisibility(View.VISIBLE);
+            movieViewModel.getMovies().observe(getViewLifecycleOwner(), movies -> {
+                    progressBar.setVisibility(View.GONE);
+                    movieAdapter.setMovies(movies);
+                    movieAdapter.notifyDataSetChanged();
+                }
+            );
             rvMovie.setLayoutManager(new GridLayoutManager(getContext(), 2));
             rvMovie.setHasFixedSize(true);
             rvMovie.setAdapter(movieAdapter);

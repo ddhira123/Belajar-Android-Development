@@ -1,12 +1,16 @@
 package com.example.movieslistjetpack.ui.detail;
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule;
+import androidx.lifecycle.MutableLiveData;
+import androidx.lifecycle.Observer;
+
 import com.example.movieslistjetpack.data.source.CatalogueRepository;
 import com.example.movieslistjetpack.data.source.local.entity.MovieEntity;
 import com.example.movieslistjetpack.data.source.local.entity.TVShowEntity;
-import com.example.movieslistjetpack.data.source.FakeCatalogueRepository;
 import com.example.movieslistjetpack.utils.DataDummy;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -26,8 +30,17 @@ public class DetailViewModelTest {
     private final TVShowEntity dummyTVShow = DataDummy.generateDummyTVShows().get(0);
     private final String tvShowId = dummyTVShow.getId();
 
+    @Rule
+    public InstantTaskExecutorRule instantTaskExecutorRule = new InstantTaskExecutorRule();
+
     @Mock
     private CatalogueRepository catalogueRepository;
+
+    @Mock
+    private Observer<MovieEntity> movieObserver;
+
+    @Mock
+    private Observer<TVShowEntity> tvShowObserver;
 
     @Before
     public void setUp() {
@@ -40,8 +53,10 @@ public class DetailViewModelTest {
 
     @Test
     public void getMovie() {
-        when(catalogueRepository.getMovieById(movieId)).thenReturn(dummyMovie);
-        MovieEntity movieEntity = detailViewModelMovie.getMovie();
+        MutableLiveData<MovieEntity> movie = new MutableLiveData<>();
+        movie.setValue(dummyMovie);
+        when(catalogueRepository.getMovieById(movieId)).thenReturn(movie);
+        MovieEntity movieEntity = detailViewModelMovie.getMovie().getValue();
         verify(catalogueRepository).getMovieById(movieId);
         assertNotNull(movieEntity);
         assertEquals(dummyMovie.getMovieId(), movieEntity.getMovieId());
@@ -52,12 +67,17 @@ public class DetailViewModelTest {
         assertEquals(dummyMovie.getStars(), movieEntity.getStars());
         assertEquals(dummyMovie.getStoryline(), movieEntity.getStoryline());
         assertEquals(dummyMovie.getYear(), movieEntity.getYear());
+
+        detailViewModelMovie.getMovie().observeForever(movieObserver);
+        verify(movieObserver).onChanged(dummyMovie);
     }
 
     @Test
     public void getTVShow() {
-        when(catalogueRepository.getTVShowById(tvShowId)).thenReturn(dummyTVShow);
-        TVShowEntity tvShowEntity = detailViewModelTVShow.getTVShow();
+        MutableLiveData<TVShowEntity> tvShow = new MutableLiveData<>();
+        tvShow.setValue(dummyTVShow);
+        when(catalogueRepository.getTVShowById(tvShowId)).thenReturn(tvShow);
+        TVShowEntity tvShowEntity = detailViewModelTVShow.getTVShow().getValue();
         verify(catalogueRepository).getTVShowById(tvShowId);
         assertNotNull(tvShowEntity);
         assertEquals(dummyTVShow.getId(), tvShowEntity.getId());
@@ -68,5 +88,8 @@ public class DetailViewModelTest {
         assertEquals(dummyTVShow.getStars(), tvShowEntity.getStars());
         assertEquals(dummyTVShow.getStoryline(), tvShowEntity.getStoryline());
         assertEquals(dummyTVShow.getYear(), tvShowEntity.getYear());
+
+        detailViewModelTVShow.getTVShow().observeForever(tvShowObserver);
+        verify(tvShowObserver).onChanged(dummyTVShow);
     }
 }
