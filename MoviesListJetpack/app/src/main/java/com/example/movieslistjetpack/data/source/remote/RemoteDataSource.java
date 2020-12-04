@@ -4,6 +4,7 @@ import android.os.Handler;
 
 import com.example.movieslistjetpack.data.source.remote.response.MovieResponse;
 import com.example.movieslistjetpack.data.source.remote.response.TVShowResponse;
+import com.example.movieslistjetpack.utils.EspressoIdlingResource;
 import com.example.movieslistjetpack.utils.JsonHelper;
 
 import java.util.List;
@@ -26,11 +27,21 @@ public class RemoteDataSource {
     }
 
     public void getAllMovies(LoadMoviesCallback loadMoviesCallback){
-        handler.postDelayed(()-> loadMoviesCallback.onAllMoviesReceived(jsonHelper.loadMovies()), SERVICE_LATENCY_IN_MILLIS);
+        EspressoIdlingResource.increment();
+        handler.postDelayed(()-> {
+            loadMoviesCallback.onAllMoviesReceived(
+                    jsonHelper.loadMovies());
+                    EspressoIdlingResource.decrement();
+        }, SERVICE_LATENCY_IN_MILLIS);
     }
 
     public void getAllTVShows(LoadTVShowsCallback loadTVShowsCallback){
-        handler.postDelayed(()-> loadTVShowsCallback.onAllTVShowsReceived(jsonHelper.loadTVShows()), SERVICE_LATENCY_IN_MILLIS);
+        EspressoIdlingResource.increment();
+        handler.postDelayed(()-> {
+            loadTVShowsCallback.onAllTVShowsReceived(
+                jsonHelper.loadTVShows());
+                EspressoIdlingResource.decrement();
+        }, SERVICE_LATENCY_IN_MILLIS);
     }
 
     public interface LoadMoviesCallback {

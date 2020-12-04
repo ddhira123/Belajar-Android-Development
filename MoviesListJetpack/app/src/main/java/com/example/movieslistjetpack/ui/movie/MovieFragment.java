@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieslistjetpack.R;
-import com.example.movieslistjetpack.data.source.local.entity.MovieEntity;
 import com.example.movieslistjetpack.viewmodel.ViewModelFactory;
-
-import java.util.List;
 
 public class MovieFragment extends Fragment {
     private RecyclerView rvMovie;

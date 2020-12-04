@@ -14,10 +14,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.movieslistjetpack.R;
-import com.example.movieslistjetpack.data.source.local.entity.TVShowEntity;
 import com.example.movieslistjetpack.viewmodel.ViewModelFactory;
-
-import java.util.List;
 
 public class TVShowFragment extends Fragment {
     private RecyclerView rvTVShow;

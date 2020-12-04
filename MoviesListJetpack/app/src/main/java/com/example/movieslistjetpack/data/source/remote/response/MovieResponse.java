@@ -39,64 +39,32 @@ public class MovieResponse implements Parcelable {
         return movieId;
     }
 
-    public void setMovieId(String movieId) {
-        this.movieId = movieId;
-    }
-
     public String getTitle() {
         return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getStoryline() {
         return storyline;
     }
 
-    public void setStoryline(String storyline) {
-        this.storyline = storyline;
-    }
-
     public String getYear() {
         return year;
-    }
-
-    public void setYear(String year) {
-        this.year = year;
     }
 
     public String getStars() {
         return stars;
     }
 
-    public void setStars(String stars) {
-        this.stars = stars;
-    }
-
     public String getGenre() {
         return genre;
-    }
-
-    public void setGenre(String genre) {
-        this.genre = genre;
     }
 
     public String getRating() {
         return rating;
     }
 
-    public void setRating(String rating) {
-        this.rating = rating;
-    }
-
     public String getImgPath() {
         return imgPath;
-    }
-
-    public void setImgPath(String imgPath) {
-        this.imgPath = imgPath;
     }
 
     @Override

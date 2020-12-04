@@ -34,7 +34,6 @@ public class CatalogueRepository implements CatalogueDataSource {
         return INSTANCE;
     }
 
-    @Override
     public LiveData<List<MovieEntity>> getAllMovies() {
         MutableLiveData<List<MovieEntity>> movieResults = new MutableLiveData<>();
         remoteDataSource.getAllMovies(movieResponses -> {
@@ -56,7 +55,6 @@ public class CatalogueRepository implements CatalogueDataSource {
         return movieResults;
     }
 
-    @Override
     public LiveData<MovieEntity> getMovieById(String id) {
         MutableLiveData<MovieEntity> movieEntityResult = new MutableLiveData<>();
         remoteDataSource.getAllMovies(movieResponses -> {
@@ -79,7 +77,6 @@ public class CatalogueRepository implements CatalogueDataSource {
         return movieEntityResult;
     }
 
-    @Override
     public LiveData<List<TVShowEntity>> getAllTVShows() {
         MutableLiveData<List<TVShowEntity>> tvShowResults = new MutableLiveData<>();
         remoteDataSource.getAllTVShows(tvShowResponses -> {
@@ -102,7 +99,6 @@ public class CatalogueRepository implements CatalogueDataSource {
         return tvShowResults;
     }
 
-    @Override
     public LiveData<TVShowEntity> getTVShowById(String id) {
         MutableLiveData<TVShowEntity> tvShowEntityResult = new MutableLiveData<>();
         remoteDataSource.getAllTVShows(tvShowResponses -> {

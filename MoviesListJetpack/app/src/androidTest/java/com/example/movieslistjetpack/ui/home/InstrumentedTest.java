@@ -1,17 +1,20 @@
 package com.example.movieslistjetpack.ui.home;
 
+import androidx.test.core.app.ActivityScenario;
+import androidx.test.espresso.IdlingRegistry;
 import androidx.test.espresso.contrib.RecyclerViewActions;
-import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
 import com.example.movieslistjetpack.R;
 import com.example.movieslistjetpack.data.source.local.entity.MovieEntity;
 import com.example.movieslistjetpack.data.source.local.entity.TVShowEntity;
+import com.example.movieslistjetpack.ui.SplashScreenActivity;
 import com.example.movieslistjetpack.utils.DataDummy;
+import com.example.movieslistjetpack.utils.EspressoIdlingResource;
 
-import org.junit.Rule;
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import java.text.MessageFormat;
 import java.util.List;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -22,17 +25,24 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 
-public class HomeActivityTest {
+public class InstrumentedTest {
 
     private final List<MovieEntity> dummyMovies = DataDummy.generateDummyMovies();
     private final List<TVShowEntity> dummyTVShows = DataDummy.generateDummyTVShows();
 
-    @Rule
-    public ActivityScenarioRule<HomeActivity> activityRule = new ActivityScenarioRule<>(HomeActivity.class);
+    @Before
+    public void setup() {
+        ActivityScenario.launch(SplashScreenActivity.class);
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.getEspressoIdlingResource());
+    }
+
+    @After
+    public void tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.getEspressoIdlingResource());
+    }
 
     @Test
     public void loadMovies(){
-        delay2seconds();
         // allOf() is used to overcome ambiguous exception during testing that caused by espresso
         onView(allOf(withId(R.id.rv_items), isDisplayed()));
         onView(allOf(withId(R.id.rv_items), isDisplayed())).perform(RecyclerViewActions.scrollToPosition(dummyMovies.size()));
@@ -40,11 +50,8 @@ public class HomeActivityTest {
 
     @Test
     public void loadMovieDetails(){
-        delay2seconds();
-        delay2seconds();
-        delay2seconds();
+        onView(allOf(withId(R.id.rv_items), isDisplayed()));
         onView(allOf(withId(R.id.rv_items), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        delay2seconds();
         onView(withId(R.id.text_title)).check(matches(isDisplayed()));
         onView(withId(R.id.text_title)).check(matches(withText(dummyMovies.get(0).getTitle())));
         onView(withId(R.id.text_year_name)).check(matches(isDisplayed()));
@@ -71,20 +78,17 @@ public class HomeActivityTest {
 
     @Test
     public void loadTVShows(){
-        delay2seconds();
+        onView(withId(R.id.home)).check(matches(isDisplayed()));
         onView(withText("TV Shows")).perform(click());
-        delay2seconds();
         onView(allOf(withId(R.id.rv_items), isDisplayed()));
         onView(allOf(withId(R.id.rv_items), isDisplayed())).perform(RecyclerViewActions.scrollToPosition(dummyTVShows.size()));
     }
 
     @Test
     public void loadTVShowDetails(){
-        delay2seconds();
+        onView(withText("TV Shows")).check(matches(isDisplayed()));
         onView(withText("TV Shows")).perform(click());
-        delay2seconds();
         onView(allOf(withId(R.id.rv_items), isDisplayed())).perform(RecyclerViewActions.actionOnItemAtPosition(0, click()));
-        delay2seconds();
         onView(withId(R.id.text_title)).check(matches(isDisplayed()));
         onView(withId(R.id.text_title)).check(matches(withText(dummyTVShows.get(0).getTitle())));
         onView(withId(R.id.text_year_name)).check(matches(isDisplayed()));
@@ -107,14 +111,5 @@ public class HomeActivityTest {
         onView(withId(R.id.text_storyline_name)).check(matches(withText("Storyline")));
         onView(withId(R.id.text_storyline)).check(matches(isDisplayed()));
         onView(withId(R.id.text_storyline)).check(matches(withText(dummyTVShows.get(0).getStoryline())));
-    }
-
-
-    private void delay2seconds() {
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 }
