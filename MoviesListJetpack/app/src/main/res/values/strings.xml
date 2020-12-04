@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">MoviesListJetpack</string>
+    <string name="app_splash_subtitle">Get Movies Info in Your Hand</string>
+    <string name="title_activity_detail_movie">Detail Movie</string>
+
+    <string name="title">Title</string>
+    <string name="movies">Movies</string>
+    <string name="tv_shows">TV Shows</string>
+    <string name="genre">Genre: </string>
+    <string name="storyline">Storyline</string>
+    <string name="year">Year: </string>
+    <string name="rating">Rating: </string>
+    <string name="stars">Stars: </string>
+    <string name="dummyName">John Doe</string>
+    <string name="dummyYear">2021–2022</string>
+    <string name="cover_image">COVER IMAGE</string>
+</resources>
